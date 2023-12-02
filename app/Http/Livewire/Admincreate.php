@@ -55,12 +55,7 @@ class Admincreate extends Component
             $imagename = Carbon::now()->timestamp. '.' .$this->image->extension();
             $this->image->storeAs('files',$imagename);
             $data['image'] = $imagename;
-            if(!empty($data['is_item'])){
-                $data['is_item'] = $this->is_item;
-                $data['is_item'] = 'yes';
-            }else{
-                $data['is_item'] = 'no';
-            }
+            $data['is_item'] = $this->is_item == true ? 'yes' : 'no';
             $data['prod_uniqid'] = $uniqid;
             $data->save();
             
@@ -71,10 +66,6 @@ class Admincreate extends Component
                 $multiimage->multiimg = $imagename;
                 $multiimage->multiid = $uniqid;
                 $multiimage->save();
-              // $this->multiimg = json_encode($this->multiimg);
-              // multiimg::create([
-              //  'multiimg' => $this->multiimg,
-              // ]);
                   }
 
               session()->flash('success', 'data product has been successfully'); 

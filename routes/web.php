@@ -20,7 +20,9 @@ use App\Http\Livewire\Upgrade;
 use App\Http\Livewire\Notifications;
 use App\Http\Livewire\Tableproduct;
 use App\Http\Livewire\Editeproduct;
-use App\Http\Livewire\MultiImage;
+use App\Http\Livewire\CategoryCreate;
+use App\Http\Livewire\CategoryShow;
+use App\Http\Livewire\CategoryEdit;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,13 +36,13 @@ use App\Http\Livewire\MultiImage;
 
 
 
-Route::get('/pageauth', function () {
-    return view('welcome');
+Route::get('/',Indexpage::class, function () {
+    return view('/');
 });
 
-Route::get('/',Indexpage::class, function () {
+Route::get('/pageauth', function () {
 
-    return view('/');
+    return view('/welcome');
 
 })->middleware(['auth']);
 
@@ -86,9 +88,12 @@ Route::get('/showproduct',Tableproduct::class)->name('livewire.showproduct');
 
 Route::get('/edit-product/{id}',Editeproduct::class)->name('livewire.edit-product');
 
-Route::get('/multiimage',MultiImage::class)->name('livewire.multiimg');
+Route::get('/category-create',CategoryCreate::class)->name('livewire.category-create');
 
-//Route::get('/edit-producte',Editeproduct::class)->name('livewire.edit-producte');
+Route::get('/category-show',CategoryShow::class)->name('livewire.show');
+
+Route::get('/category-edit/{id}',CategoryEdit::class)->name('livewire.category-edit');
+
 
 
 });

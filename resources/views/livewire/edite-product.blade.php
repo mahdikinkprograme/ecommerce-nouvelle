@@ -1,8 +1,16 @@
-
+<?php
+use App\Models\multiimg;
+use App\Models\product;
+?>
 <div>
 <div class="card container" id="cardmax" style="width:500px">
   <div class="card-header">edite product</div>
   <div class="card-body">
+  @if (session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif 
   @foreach(array($student) as $data)
       <form   wire:submit.prevent="updateproduct('{{$data['id']}}')"   enctype="multipart/form-data"> 
          @csrf
@@ -34,25 +42,21 @@
            @else
            <img src="{{asset('app/files/files')}}/{{$data['image']}}" style="width: 30px;" alt="" class="cart__img">
            @endif
-          
         </div>
+        
         <div class="form-group">
            <label class="form-label" for="inputImage">multi Image:</label>
-           <input type="file" wire:model="multiimg" multiple>
+           <input type="file" wire:model="multiimg"   multiple>
         </div>
+      
         <div class="form-group">
            <label for="is_item">item</label>
-           <input type="checkbox" wire:model = "is_item" value="yes">
+           <input type="checkbox" wire:model = "is_item"  value="{{$data['is_item']}}">
         </div>
         <input type="submit"  class="btn btn-success"></br>
     </form>
     @endforeach
   </div>
-
-  @if(session('message'))
-       <div class="alert alert-warning alert-dismissible fade show" role="alert">{{session('message')}}
-        </div>
-        @endif
   
 </div>
 </div>

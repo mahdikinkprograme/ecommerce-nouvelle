@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('image');
             $table->integer('price');
-            $table->integer('user_id');
             $table->string('session_id');
             $table->timestamps();
         });

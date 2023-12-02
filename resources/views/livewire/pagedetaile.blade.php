@@ -3,16 +3,63 @@ use App\Models\multiimg;
 use App\Models\product;
 use App\Models\cart;
 ?>
+<div>
+<header class="header" id="header">
+            <nav class="nav container">
+                <a href="#" class="nav__logo">
+                    <i class='bx bxs-watch nav__logo-icon'></i> Rolex
+                </a>
 
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="#home" class="nav__link active-link">Home</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#featured" class="nav__link">Featured</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#products" class="nav__link">Products</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#new" class="nav__link">New</a>
+                        </li>
+                    </ul>
+
+                    <div class="nav__close" id="nav-close">
+                        <i class='bx bx-x' ></i>
+                    </div>
+                </div>
+
+                <div class="nav__btns">
+                    <!-- Theme change button -->
+                    <i class='bx bx-moon change-theme' id="theme-button"></i>
+                    <?php
+                     $session_id = Session()->get('session_id');
+                     if(empty($session_id)){
+                         $session_id = Session::getId();
+                         Session()->put('session',$session_id);
+                     }
+                    $cartcount = cart::where('session_id',$session_id)->count();
+                    ?>
+                   
+                    <div class="nav__shop" id="cart-shop">
+                        <i class='bx bx-shopping-bag' ><span style="color:#f64749">{{$totalcount}}</span></i>
+                    </div>
+
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class='bx bx-grid-alt' ></i>
+                    </div>
+                </div>
+            </nav>
+        </header>   
 
 <div class = "card-wrapper">
    <div  class='cart' id="cart"  wire:ignore.self  tabindex="-1" role="dialog" aria-labelledby="cartLabel" aria-hidden="true">
             <a class='bx bx-x cart__close' data-dismiss="cart-close" aria-label="cart-close"  id="cart-close" aria-hidden="true cart-close"></a>
-            <h2 class="cart__title-center">My Cart</h2> 
+            <h2 class="cart__title-center">my cart</h2> 
+            @if(cart::count() > 0)
             @foreach($cartitems as $item)
-            @if(empty(cart::where('prod_id',$item['id'])))
-            <h1>emty cart</h1>
-            @else
             <div class="cart__container col-mt-5">
                 <article class="cart__card">
                     <div class="cart__box">
@@ -33,13 +80,15 @@ use App\Models\cart;
                             </div>
                            <i class='bx bx-trash-alt cart__amount-trash' wire:click="deletitem('{{$item->id}}')"></i>
                     </div>
-                </article> 
-            </div>
-            @endif
+                </article>   
+              </div>          
             @endforeach
+            @else
+            <h1 class="container" style="text-align: center">cart is empty</h1>
+            @endif
             <div class="cart__prices">
                 <span class="cart__prices-item">total :</span>
-                <span class="cart__prices-total">${{$total}}</span>     
+                <span class="cart__prices-total">{{$total}} usd</span>     
      </div>
   </div>   
       
@@ -103,14 +152,6 @@ use App\Models\cart;
             </ul>
           </div>
 
-          <?php
-          $session_id = Session()->get('session_id');
-          if(empty($session_id)){
-              $session_id = Session::getId();
-              Session()->put('session',$session_id);
-          }    
-          ?>
-
           <form wire:submit.prevent="store({{$product['id']}})"   enctype="multipart/form-data"> 
               @csrf
           <div class = "purchase-info">
@@ -119,27 +160,28 @@ use App\Models\cart;
           </div>
           </form>
           
-          <div class = "social-links">
-            <p>Share At: </p>
-            <a href = "#">
-              <i class = "fab fa-facebook-f"></i>
-            </a>
-            <a href = "#">
-              <i class = "fab fa-twitter"></i>
-            </a>
-            <a href = "#">
-              <i class = "fab fa-instagram"></i>
-            </a>
-            <a href = "#">
-              <i class = "fab fa-whatsapp"></i>
-            </a>
-            <a href = "#">
-              <i class = "fab fa-pinterest"></i>
-            </a>
-          </div>
+          <div class="footer__content">
+                    <h3 class="footer__title">Social</h3>
+
+                    <ul class="footer__social">
+                        <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                            <i class='bx bxl-facebook'></i>
+                        </a>
+
+                        <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                            <i class='bx bxl-twitter' ></i>
+                        </a>
+
+                        <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                            <i class='bx bxl-instagram' ></i>
+                        </a>
+                    </ul>
+                </div>
+            </div>
         </div>
       </div>
     </div>
+  </div>
 
   
     

@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Admin::create([
             'name'=>'Admin',
-            'Email' => 'admin@admin.com',
-            'password'=>bcrypt('password')
+            'Email' => '1901199m@gmail.com',
+            'password'=>bcrypt('190119911')
         ]);
 
         \App\Models\User::create([
@@ -28,6 +28,11 @@ class DatabaseSeeder extends Seeder
             'password'=>bcrypt('password')
         ]);
 
+        $this->call([
+            products::class,
+        ]);
+
+    
 
     }
 }

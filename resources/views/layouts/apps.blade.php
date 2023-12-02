@@ -31,10 +31,11 @@
         @auth()
             <div class="wrapper">
                     @include('layouts.navbars.sidebar')
+
                 <div class="main-panel">
                     @include('layouts.navbars.navbar')
-
-                    <div class="content backgrondbody">
+                    
+                    <div class="content">
                         @yield('content')
                         {{$slot}}
                     </div>
@@ -42,6 +43,7 @@
                     @include('layouts.footer')
                 </div>
             </div>
+                
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>

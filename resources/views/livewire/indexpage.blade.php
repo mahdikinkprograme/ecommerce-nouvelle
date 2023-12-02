@@ -4,8 +4,54 @@ use App\Models\product;
  ?>
 
 
-        <main class="main">
+<main class="main">
             <!--==================== HOME ====================-->
+            <header class="header" id="header">
+            <nav class="nav container">
+                <a href="#" class="nav__logo">
+                    <i class='bx bxs-watch nav__logo-icon'></i> Rolex
+                </a>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="#home" class="nav__link active-link">Home</a>
+                        </li>
+                        <li class="nav__item">
+                            @foreach($categoryshow as $cate)
+                            <a href="#featured" value="{{$cate['id']}}" class="nav__link">{{$cate['category_name']}}</a>
+                            @endforeach
+                        </li>
+                    </ul>
+
+                    <div class="nav__close" id="nav-close">
+                        <i class='bx bx-x' ></i>
+                    </div>
+                </div>
+
+                <div class="nav__btns">
+                    <!-- Theme change button -->
+                    <i class='bx bx-moon change-theme' id="theme-button"></i>
+                    <?php
+                     $session_id = Session()->get('session_id');
+                     if(empty($session_id)){
+                         $session_id = Session::getId();
+                         Session()->put('session',$session_id);
+                     }
+                    $cartcount = cart::where('session_id',$session_id)->count();
+                    ?>
+                   
+                    <div class="nav__shop" id="cart-shop">
+                        <i class='bx bx-shopping-bag' ><span style="color:#f64749">{{$cartcount}}</span></i>
+                    </div>
+
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class='bx bx-grid-alt' ></i>
+                    </div>
+                </div>
+            </nav>
+        </header>   
+
             <div  class='cart' id="cart"  wire:ignore.self  tabindex="-1" role="dialog" aria-labelledby="cartLabel" aria-hidden="true">
             <a class='bx bx-x cart__close' data-dismiss="cart-close" aria-label="cart-close"  id="cart-close" aria-hidden="true cart-close"></a>
             <h2 class="cart__title-center">My Cart</h2> 
@@ -129,52 +175,19 @@ use App\Models\product;
                 </h2>
 
                 <div class="products__container grid">
-                    @foreach($is_item as $datas)
+                @foreach($is_item as $datas)
                     <article class="products__card">
                         <img src="{{asset('app/files/files')}}/{{$datas['image']}}" alt="" class="products__img">
-
                         <h3 class="products__title">{{$datas['name']}}</h3>
                         <span class="products__price">{{$datas['price']}}$</span>
 
                         <button class="products__button">
-                            <i class='bx bx-shopping-bag'></i>
+                            <i class='bx bx-shopping-bag'>
+                            </i>
+                            <a href="{{ url('detail/'.$datas['id']) }}" style="color:#fff">add cart</a>
                         </button>
                     </article>
                     @endforeach
-
-                    <article class="products__card">
-                        <img src="{{asset('admin/img/product3.png')}}" alt="" class="products__img">
-
-                        <h3 class="products__title">Jubilee black</h3>
-                        <span class="products__price">$870</span>
-
-                        <button class="products__button">
-                            <i class='bx bx-shopping-bag'></i>
-                        </button>
-                    </article>
-                   
-
-                    <article class="products__card">
-                        <img src="{{asset('admin/img/product4.png')}}" alt="" class="products__img">
-
-                        <h3 class="products__title">Fosil me3</h3>
-                        <span class="products__price">$650</span>
-
-                        <button class="products__button">
-                            <i class='bx bx-shopping-bag'></i>
-                        </button>
-                    </article>
-
-                    <article class="products__card">
-                        <img src="{{asset('admin/img/product5.png')}}" alt="" class="products__img">
-
-                        <h3 class="products__title">Duchen</h3>
-                        <span class="products__price">$950</span>
-
-                        <button class="products__button">
-                            <i class='bx bx-shopping-bag'></i>
-                        </button>
-                    </article>
                 </div>
             </section>
 

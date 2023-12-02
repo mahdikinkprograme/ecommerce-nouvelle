@@ -30,29 +30,30 @@
 
                         <li   class="active ">
                             <a href="{{ route('livewire.admincreate')  }}">
-                                <i class="tim-icons icon-single-02"></i>
-                                <p>{{ __('admin create') }}</p>
+                                <p>{{ __('product create') }}</p>
                             </a>
                         </li>
 
                         <li   class="active ">
                             <a href="{{ route('livewire.showproduct')  }}">
-                                <i class="tim-icons icon-single-02"></i>
                                 <p>{{ __('show product') }}</p>
                             </a>
                         </li>
-
                         <li   class="active ">
-                            <a href="{{ route('livewire.multiimg')  }}">
-                                <i class="tim-icons icon-single-02"></i>
-                                <p>{{ __('add multiimg') }}</p>
+                            <a href="{{ route('livewire.category-create')  }}">
+                                <p>{{ __('category create') }}</p>
                             </a>
                         </li>
-
-                       
+                        <li   class="active ">
+                            <a href="{{ route('livewire.show')  }}">
+                                <p>{{ __('category show') }}</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
+
+
             <li  class="active ">
                 <a href="{{ route('livewire.icons') }}">
                     <i class="tim-icons icon-atom"></i>

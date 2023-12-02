@@ -32,7 +32,7 @@
         <div class="form-group">
            <label class="form-label" for="inputImage">Image:</label>
            @error('image') <span class="error" style="color:red">{{ $message }}</span> @enderror 
-           <input type="file" wire:model="image" name="image">
+           <input type="file"   wire:model="image" name="image">
            @if($image)
            <img src="{{$image->temporaryUrl()}}" style="width: 30px;">
            @endif
